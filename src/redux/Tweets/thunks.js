@@ -6,13 +6,11 @@ axios.defaults.baseURL = 'https://64661aec9c09d77a62fd188a.mockapi.io/users';
 export const getTweetsThunk = createAsyncThunk(
   'tweets/getTweets',
   async (data, thunkAPI) => {
-    // const filter = thunkAPI.getState().filter;
     const { page, following } = data;
     try {
       const response = await axios.get(
         `/?page=${page}&limit=3&following=${following}`
       );
-      console.log('response from get tweets:>> ', response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

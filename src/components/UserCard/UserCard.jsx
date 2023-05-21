@@ -12,26 +12,23 @@ import {
 } from './UserCard.styled';
 import logo from '../../Images/logo.png';
 import picture from '../../Images/picture.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleTweetsThunk } from 'redux/Tweets/thunks';
-import { getAllTweets, getFilter } from 'redux/selectors';
-import { editTweets } from 'redux/Tweets/tweetsSlice';
+import PropTypes from 'prop-types';
 
 export const UserCard = ({ tweet }) => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
-  const allTweets = useSelector(getAllTweets);
 
   const handleToggle = () => {
     dispatch(toggleTweetsThunk(tweet));
   };
 
-  const { id, name, tweets, avatar, followers, following } = tweet;
+  const { id, user, tweets, avatar, followers, following } = tweet;
   return (
     <Card id={id}>
       <ImgContainer>
         <Logo src={`${logo}`} alt="logo" />
-        <Picture src={`${picture}`} alt={name} />
+        <Picture src={`${picture}`} alt={user} />
         <AvatarContainer>
           <Avatar src={avatar} alt="user photo" />
         </AvatarContainer>
@@ -51,4 +48,15 @@ export const UserCard = ({ tweet }) => {
       </UserInfo>
     </Card>
   );
+};
+
+UserCard.propTypes = {
+  tweet: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
+    tweets: PropTypes.number.isRequired,
+    avatar: PropTypes.string.isRequired,
+    followers: PropTypes.number.isRequired,
+    following: PropTypes.bool.isRequired,
+  }).isRequired,
 };

@@ -24,6 +24,6 @@ export const HeaderLink = styled(NavLink)`
   font-size: 24px;
 
   &.active {
-    color: red;
+    color: #5736a3;
   }
 `;

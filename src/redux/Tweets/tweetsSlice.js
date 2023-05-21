@@ -1,14 +1,7 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { getTweetsThunk, toggleTweetsThunk } from './thunks';
-import { useSelector } from 'react-redux';
-import { getFilter } from 'redux/selectors';
-import { store } from 'redux/store';
 
 const arrThunk = [getTweetsThunk, toggleTweetsThunk];
-
-// function foo() {
-// const filter = useSelector(getFilter);
-// }
 
 const createThunks = type => arrThunk.map(el => el[type]);
 
@@ -16,6 +9,7 @@ const tweetsInitialState = {
   tweets: [],
   isLoading: false,
   error: '',
+  endList: false,
 };
 
 const handlePending = state => {
@@ -34,6 +28,7 @@ const handleRejected = (state, { payload }) => {
 
 const handleFulfilledGet = (state, action) => {
   state.tweets.push(...action.payload);
+  state.endList = action.payload.length < 3; 
 };
 
 const handleFulfilledPut = (state, action) => {
@@ -49,9 +44,7 @@ const tweetsSlice = createSlice({
       state.tweets = action.payload;
     },
     editTweets(state, action) {
-      console.log('index for cut from slice:>> ', action.payload);
-        state.tweets.splice(action.payload, 1);
-
+      state.tweets.splice(action.payload, 1);
     },
   },
   extraReducers: builder => {
