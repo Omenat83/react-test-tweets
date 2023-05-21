@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[156],{156:function(e,n,t){t.r(n),t.d(n,{default:function(){return u}});var r,c,o=t(168),a=t(6444),i=a.ZP.p(r||(r=(0,o.Z)(["\n  color: black;\n  font-weight: 400;\n  font-size: 24px;\n"]))),p=a.ZP.div(c||(c=(0,o.Z)(["\n  padding: 80px 80px;\n  text-align: center;\n"]))),l=t(184),u=function(){return(0,l.jsx)(p,{children:(0,l.jsx)(i,{children:"Home page of tweets"})})}}}]);
+//# sourceMappingURL=156.a813cb99.chunk.js.map
