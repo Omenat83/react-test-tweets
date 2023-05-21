@@ -37,10 +37,7 @@ const handleFulfilledGet = (state, action) => {
 };
 
 const handleFulfilledPut = (state, action) => {
-  const index = state.tweets.findIndex(
-    tweet => tweet.id === action.payload.id
-  );
-
+  const index = state.tweets.findIndex(tweet => tweet.id === action.payload.id);
   state.tweets.splice(index, 1, action.payload);
 };
 
@@ -50,6 +47,11 @@ const tweetsSlice = createSlice({
   reducers: {
     clearTweets(state, action) {
       state.tweets = action.payload;
+    },
+    editTweets(state, action) {
+      console.log('index for cut from slice:>> ', action.payload);
+        state.tweets.splice(action.payload, 1);
+
     },
   },
   extraReducers: builder => {
@@ -62,5 +64,5 @@ const tweetsSlice = createSlice({
   },
 });
 
-export const { clearTweets } = tweetsSlice.actions;
+export const { clearTweets, editTweets } = tweetsSlice.actions;
 export const tweetsReducer = tweetsSlice.reducer;

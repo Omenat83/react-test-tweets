@@ -14,13 +14,17 @@ import logo from '../../Images/logo.png';
 import picture from '../../Images/picture.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTweetsThunk } from 'redux/Tweets/thunks';
-import { getFilter } from 'redux/selectors';
+import { getAllTweets, getFilter } from 'redux/selectors';
+import { editTweets } from 'redux/Tweets/tweetsSlice';
 
 export const UserCard = ({ tweet }) => {
   const dispatch = useDispatch();
-  const filter=useSelector(getFilter);
+  const filter = useSelector(getFilter);
+  const allTweets = useSelector(getAllTweets);
 
-  const handleToggle = () => dispatch(toggleTweetsThunk(tweet));
+  const handleToggle = () => {
+    dispatch(toggleTweetsThunk(tweet));
+  };
 
   const { id, name, tweets, avatar, followers, following } = tweet;
   return (
