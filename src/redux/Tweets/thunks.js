@@ -6,6 +6,7 @@ axios.defaults.baseURL = 'https://64661aec9c09d77a62fd188a.mockapi.io/users';
 export const getTweetsThunk = createAsyncThunk(
   'tweets/getTweets',
   async (data, thunkAPI) => {
+    // const filter = thunkAPI.getState().filter;
     const { page, following } = data;
     try {
       const response = await axios.get(
@@ -27,7 +28,6 @@ export const toggleTweetsThunk = createAsyncThunk(
         following: !tweet.following,
         followers: tweet.following ? tweet.followers - 1 : tweet.followers + 1,
       });
-      console.log('response from toggle tweets:>> ', response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

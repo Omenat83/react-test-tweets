@@ -12,13 +12,15 @@ import {
 } from './UserCard.styled';
 import logo from '../../Images/logo.png';
 import picture from '../../Images/picture.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleTweetsThunk } from 'redux/Tweets/thunks';
+import { getFilter } from 'redux/selectors';
 
-export const UserCard = ({tweet}) => {
-    const dispatch = useDispatch();
+export const UserCard = ({ tweet }) => {
+  const dispatch = useDispatch();
+  const filter=useSelector(getFilter);
 
-    const handleToggle = () => dispatch(toggleTweetsThunk(tweet));
+  const handleToggle = () => dispatch(toggleTweetsThunk(tweet));
 
   const { id, name, tweets, avatar, followers, following } = tweet;
   return (
@@ -38,7 +40,7 @@ export const UserCard = ({tweet}) => {
         <UserBtn
           type="button"
           style={{ background: following ? '#5CD3A8' : '#EBD8FF' }}
-            onClick={handleToggle}
+          onClick={handleToggle}
         >
           {following ? 'following' : 'follow'}
         </UserBtn>

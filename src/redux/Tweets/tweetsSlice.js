@@ -1,7 +1,14 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { getTweetsThunk, toggleTweetsThunk } from './thunks';
+import { useSelector } from 'react-redux';
+import { getFilter } from 'redux/selectors';
+import { store } from 'redux/store';
 
 const arrThunk = [getTweetsThunk, toggleTweetsThunk];
+
+// function foo() {
+// const filter = useSelector(getFilter);
+// }
 
 const createThunks = type => arrThunk.map(el => el[type]);
 
@@ -30,8 +37,10 @@ const handleFulfilledGet = (state, action) => {
 };
 
 const handleFulfilledPut = (state, action) => {
-  const index = state.tweets.findIndex(tweet => tweet.id === action.payload.id);
-  console.log('index for change:>> ', index);
+  const index = state.tweets.findIndex(
+    tweet => tweet.id === action.payload.id
+  );
+
   state.tweets.splice(index, 1, action.payload);
 };
 

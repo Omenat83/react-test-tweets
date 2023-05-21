@@ -1,16 +1,23 @@
-export const Filter = () => {
+import { useDispatch } from "react-redux";
+import { setFilter } from "redux/Filter/filterSlice";
+import { clearTweets } from "redux/Tweets/tweetsSlice";
 
-    // useEffect(() => {
-    //     handleChange(selectedOption);
-    //   }, [selectedOption, handleChange]);
-    
+export const Filter = ({setCurrentPage}) => {
 
+  const dispatch = useDispatch();
+
+const handleChangeFilter = (evt) => {
+  dispatch(setFilter(evt.target.value));
+  dispatch(clearTweets([]));
+  setCurrentPage(1);
+
+}
     return (
         <label>
           Selected
           <select
             defaultValue=""
-            // onChange={handleChangeSelect}
+            onChange={handleChangeFilter}
           >
             <option value="">Show all</option>
             <option value="false">Follow</option>
